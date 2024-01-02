@@ -1,18 +1,11 @@
 import { TouchableOpacity, Text } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import stylesComponent from "../../../design-System/components-styles";
 
-import styles from "../styles";
-
-const ButtonSignIn = () => {
-  const navigation = useNavigation();
-
-  function navigateToSingIn(){
-    navigation.navigate("SingIn")
-  }
+const ButtonSignIn = ({ onPress }) => {
 
   return (
-    <TouchableOpacity style={styles.button} onPress={navigateToSingIn}>
-      <Text style={styles.buttonText}> Sing In </Text>
+    <TouchableOpacity style={stylesComponent.button} onPress={onPress}>
+      <Text style={stylesComponent.buttonText}> Sing In </Text>
     </TouchableOpacity>
   );
 };

@@ -11,16 +11,14 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     position: "absolute",
   },
-  gradientOverlay: {
-    flex: 1,
-    width: "100%",
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    height: 150,
-    borderBottomWidth: 30,
-    borderBottomColor: "rgba(175, 202, 235, 0)",
+
+  gradient: {
+    position:"absolute",
+    left:0,
+    right:0,
+    top:"75%",
+    height:"25%",
+    transform:[{ scaleY: -1 }]
   },
   mask: {
     ...StyleSheet.absoluteFillObject,

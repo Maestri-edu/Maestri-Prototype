@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import colors from "../../../design-System/global-styles";
+import colors from "../../design-System/global-styles";
 
 const styles = StyleSheet.create({
     label:{
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
 
     invalidFeedBack:{
         color:colors.accentRed,
-        fontSize:20,
+        fontSize:12,
         alignSelf:"flex-start",
         marginStart:32
     },
@@ -31,7 +31,6 @@ const styles = StyleSheet.create({
         display:"flex",
         justifyContent:"center",
         alignItems:"center",
-        marginTop:20
     }
 })
 
