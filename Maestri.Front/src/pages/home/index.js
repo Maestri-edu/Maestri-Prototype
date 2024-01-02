@@ -1,23 +1,35 @@
-import { Text,View } from "react-native";
-import styles from "./styles.js";
-import ButtonSignIn from "../../components/buttons/Sign-In/";
-import ButtonSignUp from "../../components/buttons/Sign-Up/";
+import { Text, View, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import BackGround from "../../components/backgroud/";
-import LogoMaestri from "../../components/iconMaestri"
-
+import LogoMaestri from "../../components/iconMaestri/";
+import stylesComponent from "../../design-System/components-styles.js";
+import Title from "../../components/title/index.js";
 
 const Home = () => {
+  const navigation = useNavigation();
+  const toSignIn = () => {
+    navigation.navigate("SignIn");
+  };
+  const toSignUp = () => {
+    navigation.navigate("SignUp");
+  };
+
   return (
-    <View style={styles.container}>
+    <View style={stylesComponent.container}>
       <BackGround />
-      <View style={styles.contentBox}>
+      <View style={stylesComponent.contentBox}>
         <LogoMaestri />
-        <Text style={styles.title}> Seja bem vindo a Maestri </Text>
-        <ButtonSignIn />
-        <ButtonSignUp />
+        <Title title={"Seja bem vindo a Maestri"}/>
+        <TouchableOpacity style={stylesComponent.button} onPress={toSignIn}>
+          <Text style={stylesComponent.buttonText}> Sing In </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={stylesComponent.button} onPress={toSignUp}>
+          <Text style={stylesComponent.buttonText}> Sing Up </Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
 };
 
-export default Home
+export default Home;

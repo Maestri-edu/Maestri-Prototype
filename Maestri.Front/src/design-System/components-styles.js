@@ -1,9 +1,9 @@
 import { StyleSheet } from "react-native";
-import colors from "../../../design-System/global-styles";
+import colors from "./global-styles";
 
-const styles = StyleSheet.create({
+const stylesComponent = StyleSheet.create({
   container: {
-    flex: 1,
+    flex:1,
     position: "relative",
   },
 
@@ -32,6 +32,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
   },
+  title: {
+    fontSize: 25,
+    color: colors.softWhite,
+    marginBottom: 20,
+  },
 });
 
-export default styles;
+
+export default stylesComponent
