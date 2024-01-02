@@ -1,23 +1,67 @@
+from datetime import datetime
+from email.policy import default
 from flask import Flask, jsonify, request
-
-#Flask Test 
-#This is a simple test, don't worry too much about it
-#Returning the lion.txt file to the /sin request
+from Services.Tokens.OAuth import OAuth
+from Model.Payment.PixPaymentModel import PixPaymentModel, Debtor, Calendar, Value
+from Services.Payment.PaymentRequest import PaymentRequest
+from Services.Common.DefaultRequest import DefaultRequest
+from Model.Payment.PixPaymentSlipModel import PixPaymentSlipModel
+from Model.Payment.PayerModel import PayerModel, Telephone, Address
+from Model.Client.ClientTokenClass import ClientTokenClass
+from Common.Enums.PersonEnums import PersonType, UF
 
 app = Flask(__name__)
 
-sin = ["Is this the real life?"]
+default_request = DefaultRequest()
+token = ClientTokenClass()
+auth = OAuth(default_request, token)
+pay = PaymentRequest(default_request, auth)
 
-def read_lion():
-    f = open("lion.txt", "r")
-    for x in f:
-        sin.append(x)
-    sin.append("Or this is just fanta-sea?")
+@app.route('/ok')
+def get_token2():
+    result = auth.get_oauth_bearer_token()
+    print(result)
+    return ""
 
-@app.route('/sin')
-def get_sin():
-    return jsonify(sin)
+@app.route('/ok2')
+def get_pix2():
+    
+    payment = PixPaymentModel(
+        Debtor("Jonas", "Id 10092283228"),
+        Value(50.50, 1),
+        Calendar(10),
+        "key",
+        "solicitation")
 
-read_lion()
+    result = pay.emit_pix_payment(payment)
+    
+    return ""
+
+@app.route('/ok3')
+def get_pix_slip():
+    payment = PixPaymentSlipModel(
+        '80',
+        33.00,
+        datetime.today(),
+        3,
+        PayerModel(
+            "9000", 
+            "name",
+            "email",
+            PersonType.PF,
+            Telephone("ddd", "number"),
+            Address(
+                "cep", "complete Adress",
+                UF.PR,
+                "city",
+                "neighborhood",
+                "ab1",
+                "complement")
+            )
+        )
+    
+    result = pay.emit_pix_slip_payment(payment)
+    
+    return "sin"
 
 app.run(port=5000, host='localhost', debug=True)
