@@ -1,0 +1,29 @@
+Cadastro 1 (dados personaltada)
+API S
+
+RG
+Data de Nascimento (Data)
+Estado que Nasceu (Usar API Correio)
+Cidade que nascceu  (Usar API Correio)
+Nome da Mamae
+Estado Civil (Buscar no personaldataeducationaldatastatus, exibir coluna status e inserir dados da coluna id)
+
+Cadastro 2 (dados da personaldataaddresses)
+API viacep
+
+CEP (Fazer Busca API IBGE - Preencher com as respostas
+os dados abaixo, se houver)
+
+Rua (so permitir alterecao apos resposta api,Preencher com dados da resposta, usu[ario pode alterar)
+Numero
+Bairro (so permitir alterecao apos resposta api,Preencher com dados da resposta, usu[ario pode alterar)
+Complemento
+Cidade (Preenchido obrigatoriamente pela resposta da api IBGE, usuario nao pode mudar)
+Estado (Preenchido obrigatoriamente pela resposta da api IBGE, usuario nao pode mudar)
+
+Cadastro 3 Dados Educacionais
+
+Cadastro 4 Anexar Documentos (anexar e conferir)
+
+Cadastro 5 Exibir Contrato + Aceite + Conferencia (Selfie Segurando documento)
+

@@ -4,12 +4,11 @@
     "slug": "Maestri.Front",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "transparent",
+    "icon": "./assets/logoMaestri2.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#325A82"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -19,7 +18,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/logoMaestri2.png",
         "backgroundColor": "#ffffff"
       }
     },
