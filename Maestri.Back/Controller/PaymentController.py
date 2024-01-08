@@ -16,15 +16,13 @@ class PaymentController():
     def create_pix_payment(self):
         
         payment = PixPaymentModel(
-            Debtor("Jonas", "Id 10092283228"),
+            Debtor("Jonas", "Id 10092283228", PersonType.PF),
             Value(50.50, 1),
             Calendar(10),
             "key",
             "solicitation")
 
-        result = self._pay.emit_pix_payment(payment)
-
-        return ""
+        return self._pay.emit_pix_payment(payment)
 
     def create_pix_slip_payment(self):
         payment = PixPaymentSlipModel(
@@ -48,6 +46,5 @@ class PaymentController():
                 )
             )
         
-        result = self._pay.emit_pix_slip_payment(payment)
-        
-        return "sin"
+        return self._pay.emit_pix_slip_payment(payment)
+

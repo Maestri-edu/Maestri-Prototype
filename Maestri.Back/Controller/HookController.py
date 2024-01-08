@@ -10,8 +10,8 @@ class HookController():
 
     def create_hook_pix(self):
         response = self._hook.create_pix_hook(URL("hook_pix_test-url.com"), "pix-key")
-        return "hook_pix"
+        return response
 
     def create_hook_pix_slip(self):
         response = self._hook.create_pix_slip_hook(URL("hook_pix_slip_test-url.com"))
-        return "hook_pix_slip"
+        return response

@@ -33,13 +33,13 @@ class PayerModel():
                 "telefone": self.telephone.number,
                 "numero": self.adress.number,
                 "complemento": self.adress.complement,
-                PersonType.get_field_dict()[self.type]: self.id_number,
-                "tipoPessoa": self.type,
+                "cpfCnpj": self.id_number,
+                "tipoPessoa": self.type.value,
                 "nome": self.name,
                 "endereco": self.adress.complete_adress,
                 "bairro": self.adress.neighborhood,
                 "cidade": self.adress.city,
-                "uf": self.adress.uf,
+                "uf": self.adress.uf.name,
                 "cep": self.adress.cep_number
             }
         )

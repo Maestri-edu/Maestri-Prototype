@@ -1,25 +1,27 @@
 import json
 import requests
 from dataclasses import dataclass
-from typing import dataclass_transform
 from Common.Constants.WebConstants import URL
 
 @dataclass(frozen = True, order = True)
 class _TestResponse:
     status_code: int
+    request: str
     token: str = "Bearer ABCDEFGHIJKMLNOPQRSTUVWXYZ - Token"
 
 class DefaultRequest:
     
     def post_request(self, url: URL, header: dict[str, str], body: dict[str, str | int | float] | str):
 
+        request = f"{url} {header} {body}"
+        
         print("\n")
         print("------------------------------")
-        print(f" {url.value} \n\n {header} \n\n {json.dumps(body)}")
+        print(f" {url.value} \n\n {header} \n\n {body}")
         print("------------------------------")
         print("\n")
         
-        response = _TestResponse(200)
+        response = _TestResponse(200, request)
 
         return response
 
@@ -32,15 +34,17 @@ class DefaultRequest:
     
     def get_request(self, url: URL, header: str, body: str):
         
+        request = f"{url} {header} {body}"
+        
         print("\n")
         print("------------------------------")
-        print(f" {url.value} \n\n {header} \n\n {json.dumps(body)}")
+        print(f" {url.value} \n\n {header} \n\n {body}")
         print("------------------------------")
         print("\n")
+        
+        response = _TestResponse(200, request)
 
-        response = _TestResponse(200)
-
-        return response.status_code
+        return response
         
         # response = requests.get(url,
         #     headers = {"Content-Type": "application/x-www-form-urlencoded"},
@@ -52,15 +56,17 @@ class DefaultRequest:
     
     def put_request(self, url: URL, header: dict[str, str], body: dict[str, str | int | float] | str):
         
+        request = f"{url} {header} {body}"
+        
         print("\n")
         print("------------------------------")
-        print(f" {url.value} \n\n {header} \n\n {json.dumps(body)}")
+        print(f" {url.value} \n\n {header} \n\n {body}")
         print("------------------------------")
         print("\n")
+        
+        response = _TestResponse(200, request)
 
-        response = _TestResponse(200)
-
-        return response.status_code
+        return response
         
         # response = requests.put(url.value,
         #     headers = header,

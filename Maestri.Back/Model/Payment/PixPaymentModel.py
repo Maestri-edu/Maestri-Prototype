@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from Common.Enums.PersonEnums import PersonType
 
 @dataclass(frozen = True, order = True)
 class Value():
@@ -8,7 +9,7 @@ class Value():
     def json_request_body(self):
         return (
             {
-                "original": self.original_value,
+                "original": str(self.original_value),
                 "modalidadeAlteracao": self.alter_model
             }
         )
@@ -28,11 +29,12 @@ class Calendar():
 class Debtor():
     name: str
     id_code: str
+    type: PersonType
     
     def json_request_body(self):
         return (
             {
-                "cpf": self.id_code,
+                f"{PersonType.get_field_dict()[self.type]}": self.id_code,
                 "nome": self.name
             }
         )
@@ -59,5 +61,5 @@ class PixPaymentModel:
                 "chave": self.key,
                 "solicitacaoPagador": self.solicitation,
                 "infoAdicionais": []
-            }            
+            }       
         )
