@@ -4,7 +4,7 @@ import datetime as dt
 
 @dataclass
 class PixPaymentSlipModel:
-    number: str
+    title_number: str
     value: float
     due_date: dt.datetime
     due_date_spare_limit: int
@@ -13,9 +13,9 @@ class PixPaymentSlipModel:
     def json_request_body(self):
         return (
             {
-                "seuNumero": self.number,
+                "seuNumero": self.title_number,
                 "valorNominal": self.value,
-                "dataVencimento": str(self.due_date),
+                "dataVencimento": self.due_date.strftime("%Y-%m-%d"),
                 "numDiasAgenda": self.due_date_spare_limit,
                 "pagador": self.payer.json_request_body()
             }
