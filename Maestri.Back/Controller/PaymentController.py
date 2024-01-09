@@ -1,10 +1,10 @@
-from datetime import datetime
-from email.policy import default
 from Common.Enums.PersonEnums import PersonType, UF
 from Model.Payment.PayerModel import PayerModel, Telephone, Address
 from Model.Payment.PixPaymentModel import PixPaymentModel, Debtor, Calendar, Value
 from Model.Payment.PixPaymentSlipModel import PixPaymentSlipModel
 from Services.Payment.PaymentRequest import PaymentRequest
+from Common.Contracts.Payment.CreatePixPayment import CreatePixPayment
+from Common.Contracts.Payment.CreatePixSlipPayment import CreatePixSlipPayment
 
 class PaymentController():
     
@@ -13,26 +13,27 @@ class PaymentController():
     def __init__(self, pay: PaymentRequest):
         self._pay = pay
 
-    def create_pix_payment(self):
+    def create_pix_payment(self, request: CreatePixPayment):
         
         payment = PixPaymentModel(
-            Debtor("Jonas", "Id 10092283228", PersonType.PF),
-            Value(50.50, 1),
-            Calendar(10),
+            Debtor(request.payer_name, request.payer_id, PersonType.PF),
+            Value(request.payment_value, 1),
+            Calendar(request.expire_seconds),
             "key",
-            "solicitation")
+            request.solicitation)
 
         return self._pay.emit_pix_payment(payment)
 
-    def create_pix_slip_payment(self):
+    def create_pix_slip_payment(self, request: CreatePixSlipPayment):
+
         payment = PixPaymentSlipModel(
             '80',
-            33.00,
-            datetime.today(),
-            3,
+            request.payment_value,
+            request.due_date,
+            request.due_date_limit,
             PayerModel(
-                "9000", 
-                "name",
+                request.payer_id,
+                request.payer_name,
                 "email",
                 PersonType.PF,
                 Telephone("ddd", "number"),
