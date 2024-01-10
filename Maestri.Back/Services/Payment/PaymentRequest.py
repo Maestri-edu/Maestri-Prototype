@@ -1,8 +1,8 @@
-from dataclasses import dataclass
 from Model.Payment.PixPaymentModel import PixPaymentModel
 from Model.Payment.PixPaymentSlipModel import PixPaymentSlipModel
 from Services.Common.DefaultRequest import DefaultRequest
 from Common.Constants.WebConstants import WebConstants as wc
+from Common.Enums.RequestType import RequestType
 from Services.Tokens.OAuth import OAuth
 
 class PaymentRequest:
@@ -16,7 +16,8 @@ class PaymentRequest:
 
     def emit_pix_payment(self, pix_payment: PixPaymentModel):
         
-        response = self._dr.post_request(
+        response = self._dr.type_request(
+            RequestType.POST,
             wc.PIX_PAYMENT_URL,
             self._auth.get_standart_header_Bearer(),
             pix_payment.json_request_body()
@@ -29,7 +30,8 @@ class PaymentRequest:
 
     def emit_pix_slip_payment(self, pix_slip_payment: PixPaymentSlipModel):
         
-        response = self._dr.post_request(
+        response = self._dr.type_request(
+            RequestType.POST,
             wc.PIX_SLIP_PAYMENT_URL,
             self._auth.get_standart_header_Bearer(), 
             pix_slip_payment.json_request_body()

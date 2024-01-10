@@ -1,5 +1,6 @@
 from Model.Client.ClientTokenClass import ClientTokenClass
 from Common.Constants.WebConstants import WebConstants as wc
+from Common.Enums.RequestType import RequestType
 from Services.Common.DefaultRequest import DefaultRequest
 
 class OAuth:
@@ -19,7 +20,8 @@ class OAuth:
             "&grant_type=client_credentials"
             )
         
-        response = self._dr.post_request (
+        response = self._dr.type_request (
+            RequestType.POST,
             wc.OAUTH_TOKEN_REQUEST_URL,
             {"Content-Type": "application/x-www-form-urlencoded"},
             request_body

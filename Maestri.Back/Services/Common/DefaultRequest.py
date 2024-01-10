@@ -1,7 +1,7 @@
-import json
 import requests
 from dataclasses import dataclass
 from Common.Constants.WebConstants import URL
+from Common.Enums.RequestType import RequestType
 
 @dataclass(frozen = True, order = True)
 class _TestResponse:
@@ -10,10 +10,18 @@ class _TestResponse:
     token: str = "Bearer ABCDEFGHIJKMLNOPQRSTUVWXYZ - Token"
 
 class DefaultRequest:
-    
-    def post_request(self, url: URL, header: dict[str, str], body: dict[str, str | int | float] | str):
 
-        request = f"{url} {header} {body}"
+    _request_dict = {
+        RequestType.GET: requests.get,
+        RequestType.POST: requests.post,
+        RequestType.PUT: requests.put,
+        RequestType.DELETE: requests.delete,
+        RequestType.PATCH: requests.patch
+    }
+
+    def type_request(self, type: RequestType, url: URL, header: dict[str, str], body: dict[str, str | int | float] | str):
+        
+        request = f"type: {type.name} url: {url} header: {header} body: {body}"
         
         print("\n")
         print("------------------------------")
@@ -24,53 +32,16 @@ class DefaultRequest:
         response = _TestResponse(200, request)
 
         return response
+    
+        ''' Commented For Testing '''
+    
+        # typed_request = self._request_dict[type]
 
-        # response = requests.post(url.value,
+        # response : requests.Response = typed_request(
+        #     url.value,
         #     headers = header,
-        #     data = body)
-        
-        # response.raise_for_status()
-        # return response
-    
-    def get_request(self, url: URL, header: str, body: str):
-        
-        request = f"{url} {header} {body}"
-        
-        print("\n")
-        print("------------------------------")
-        print(f" {url.value} \n\n {header} \n\n {body}")
-        print("------------------------------")
-        print("\n")
-        
-        response = _TestResponse(200, request)
-
-        return response
-        
-        # response = requests.get(url,
-        #     headers = {"Content-Type": "application/x-www-form-urlencoded"},
-        #     data = body)
-        
-        # response.raise_for_status()
-        
-        # return response
-    
-    def put_request(self, url: URL, header: dict[str, str], body: dict[str, str | int | float] | str):
-        
-        request = f"{url} {header} {body}"
-        
-        print("\n")
-        print("------------------------------")
-        print(f" {url.value} \n\n {header} \n\n {body}")
-        print("------------------------------")
-        print("\n")
-        
-        response = _TestResponse(200, request)
-
-        return response
-        
-        # response = requests.put(url.value,
-        #     headers = header,
-        #     data = body)
+        #     data = body
+        # )
         
         # response.raise_for_status()
         
