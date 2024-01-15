@@ -1,13 +1,14 @@
 from enum import Enum
 
+
 class PersonType(Enum):
     PF = "FISICA"
     PJ = "JURIDICA"
 
     @staticmethod
     def get_field_dict():
-        return {PersonType.PF: "cpf",
-                PersonType.PJ: "cnpj"}
+        return {PersonType.PF: "cpf", PersonType.PJ: "cnpj"}
+
 
 class UF(Enum):
     AC = "AC"
