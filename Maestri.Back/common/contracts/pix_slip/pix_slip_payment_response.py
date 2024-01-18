@@ -17,6 +17,23 @@ class PixSlipPaymentResponse:
     txid: str
     simple_pix_code: str
 
+    @staticmethod
+    def create(data: dict):
+        return PixSlipPaymentResponse(
+            charge_code=data["codigoCobrança"],
+            solicitaion_code=data["codigoSolicitacao"],
+            account_number=data["seuNumero"],
+            status=data["situacao"],
+            received_datetime=data["dataHoraSituacao"],
+            received_value=data["valorTotalRecebido"],
+            payment_origin=data["origemRecebimento"],
+            bank_number=data["nossoNumero"],
+            bar_code=data["condigoBarras"],
+            typed_code=data["linhaDigitavel"],
+            txid=data["txid"],
+            simple_pix_code=data["pixCopiaECola"],
+        )
+
     def json_request_body(self):
         return {
             "codigoCobranca": self.charge_code,

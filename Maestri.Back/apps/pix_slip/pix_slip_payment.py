@@ -13,24 +13,24 @@ class PixSlipPayment:
 
     def create_payment(self, request: CreatePixSlipPayment):
         payment = PixSlipPaymentModel(
-            "80",
-            request.payment_value,
-            request.due_date,
-            request.due_date_limit,
-            PayerModel(
-                request.payer_id,
-                request.payer_name,
-                "email",
-                PersonType.PF,
-                Telephone("ddd", "number"),
-                Address(
-                    "cep",
-                    "complete Adress",
-                    UF.PR,
-                    "city",
-                    "neighborhood",
-                    "ab1",
-                    "complement",
+            title_number="80",
+            value=request.payment_value,
+            due_date=request.due_date,
+            due_date_spare_limit=request.due_date_limit,
+            payer=PayerModel(
+                id_number=request.payer_id,
+                name=request.payer_name,
+                email="email",
+                type=PersonType.PF,
+                telephone=Telephone("ddd", "number"),
+                adress=Address(
+                    cep_number="cep",
+                    complete_adress="complete Adress",
+                    uf=UF.PR,
+                    city="city",
+                    neighborhood="neighborhood",
+                    number="ab1",
+                    complement="complement",
                 ),
             ),
         )

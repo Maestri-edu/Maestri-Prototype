@@ -15,13 +15,13 @@ class PixPaymentResponse:
     @staticmethod
     def create(data: dict):
         return PixPaymentResponse(
-            data["endToEndId"],
-            data["chave"],
-            data["componentesValor"]["original"]["valor"],
-            data["txid"],
-            data["valor"],
-            data["horario"],
-            data["infoPagado"],
+            id=data["endToEndId"],
+            key=data["chave"],
+            txid=data["txid"],
+            original_value=data["componentesValor"]["original"]["valor"],
+            payment_value=data["valor"],
+            payment_datetime=data["horario"],
+            payer_info=data["infoPagador"],
         )
 
     def json_request_body(self):

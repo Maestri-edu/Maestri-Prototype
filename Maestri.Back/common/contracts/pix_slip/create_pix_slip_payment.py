@@ -13,9 +13,9 @@ class CreatePixSlipPayment:
     @staticmethod
     def create(data: dict):
         return CreatePixSlipPayment(
-            data["payment_value"],
-            data["payer_id"],
-            data["payer_name"],
-            datetime.now(),
-            1,
+            payment_value=data["payment_value"],
+            payer_id=data["payer_id"],
+            payer_name=data["payer_name"],
+            due_date=datetime.now(),
+            due_date_limit=1,
         )

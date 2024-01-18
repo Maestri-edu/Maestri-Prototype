@@ -12,11 +12,13 @@ class PixPayment:
 
     def create_payment(self, request: CreatePixPayment):
         payment = PixPaymentModel(
-            Debtor(request.payer_name, request.payer_id, PersonType.PF),
-            Value(request.payment_value, 1),
-            Calendar(request.expire_seconds),
-            "key",
-            request.solicitation,
+            debtor=Debtor(
+                id_code=request.payer_id, name=request.payer_name, type=PersonType.PF
+            ),
+            value=Value(request.payment_value, 1),
+            calendar=Calendar(request.expire_seconds),
+            key="key",
+            solicitation=request.solicitation,
         )
 
         return self._pay.emit_payment(payment)
