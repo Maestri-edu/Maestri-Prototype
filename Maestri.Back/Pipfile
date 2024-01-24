@@ -8,6 +8,7 @@ django = "*"
 djangorestframework = "*"
 black = "*"
 requests = "*"
+pytz = "*"
 
 [dev-packages]
 
