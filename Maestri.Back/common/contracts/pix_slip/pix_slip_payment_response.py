@@ -4,7 +4,6 @@ from datetime import datetime
 
 @dataclass
 class PixSlipPaymentResponse:
-    charge_code: str
     solicitaion_code: str
     account_number: str
     status: str
@@ -20,15 +19,14 @@ class PixSlipPaymentResponse:
     @staticmethod
     def create(data: dict):
         return PixSlipPaymentResponse(
-            charge_code=data["codigoCobrança"],
             solicitaion_code=data["codigoSolicitacao"],
             account_number=data["seuNumero"],
             status=data["situacao"],
-            received_datetime=data["dataHoraSituacao"],
+            received_datetime=datetime.fromisoformat(data["dataHoraSituacao"]),
             received_value=data["valorTotalRecebido"],
             payment_origin=data["origemRecebimento"],
             bank_number=data["nossoNumero"],
-            bar_code=data["condigoBarras"],
+            bar_code=data["codigoBarras"],
             typed_code=data["linhaDigitavel"],
             txid=data["txid"],
             simple_pix_code=data["pixCopiaECola"],
@@ -36,7 +34,6 @@ class PixSlipPaymentResponse:
 
     def json_request_body(self):
         return {
-            "codigoCobranca": self.charge_code,
             "codigoSolicitacao": self.solicitaion_code,
             "seuNumero": self.account_number,
             "situacao": self.status,

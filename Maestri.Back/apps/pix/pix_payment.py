@@ -16,7 +16,7 @@ class PixPayment:
                 id_code=request.payer_id, name=request.payer_name, type=PersonType.PF
             ),
             value=Value(request.payment_value, 1),
-            calendar=Calendar(request.expire_seconds),
+            calendar=Calendar(86400),
             key="key",
             solicitation=request.solicitation,
         )

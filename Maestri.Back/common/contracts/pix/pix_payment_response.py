@@ -20,7 +20,7 @@ class PixPaymentResponse:
             txid=data["txid"],
             original_value=data["componentesValor"]["original"]["valor"],
             payment_value=data["valor"],
-            payment_datetime=data["horario"],
+            payment_datetime=datetime.fromisoformat(data["horario"]),
             payer_info=data["infoPagador"],
         )
 
