@@ -7,4 +7,4 @@ class CreatePixSlipWebHook:
 
     @staticmethod
     def create(data: dict):
-        return CreatePixSlipWebHook(data["hook_url"])
+        return CreatePixSlipWebHook(hook_url=data["hook_url"])
