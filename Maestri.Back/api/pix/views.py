@@ -1,3 +1,4 @@
+from result import Ok, Err
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from apps.pix.pix_payment import PixPayment
@@ -11,7 +12,11 @@ def create_payment(request):
     request_data = CreatePixPayment.create(request.data)
     pix_payment = PixPayment(PixServiceFactory.create())
     result = pix_payment.create_payment(request_data)
-    return Response(result.request)
+    match result:
+        case Ok(success):
+            return Response(success)
+        case Err(error):
+            return Response(status=error.status_code, data=error.data)
 
 
 @api_view(["POST"])

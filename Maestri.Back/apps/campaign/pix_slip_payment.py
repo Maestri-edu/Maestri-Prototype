@@ -1,7 +1,9 @@
-from common.contracts.pix_slip.create_pix_slip_payment import CreatePixSlipPayment
+from common.contracts.campaign.create_pix_slip_payment import (
+    CreateCampaignPixSlipPayment,
+)
 from common.enums.person_enums import PersonType, UF
 from common.helper.datetime_provider import DatetimeProvider as dt
-from models.common.payer_model import PayerModel, Telephone, Address
+from models.common.payer_model import PayerModel, Address
 from models.pix_slip.pix_slip_payment_model import PixSlipPaymentModel
 from services.pix_slip.pix_slip_service import PixSlipService
 import datetime
@@ -13,7 +15,7 @@ class PixSlipPayment:
     def __init__(self, pix_slip: PixSlipService):
         self._pix_slip = pix_slip
 
-    def create_payment(self, request: CreatePixSlipPayment):
+    def create_payment(self, request: CreateCampaignPixSlipPayment):
         payment_due_date = dt.utc_now() + datetime.timedelta(days=1)
 
         payment = PixSlipPaymentModel(
@@ -24,11 +26,11 @@ class PixSlipPayment:
             payer=PayerModel(
                 id_number=request.payer_id,
                 name=request.payer_name,
-                email="email",
+                email=request.payer_email,
                 type=PersonType.PF,
-                telephone=Telephone("ddd", "number"),
+                telephone=request.payer_telephone,
                 adress=Address(
-                    cep_number="cep",
+                    cep_number=request.payer_cep,
                     complete_adress="complete Adress",
                     uf=UF.PR,
                     city="city",

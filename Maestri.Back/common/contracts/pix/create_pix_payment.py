@@ -11,8 +11,8 @@ class CreatePixPayment:
     @staticmethod
     def create(data: dict):
         return CreatePixPayment(
-            payment_value=data["payment_value"],
-            payer_id=data["payer_id"],
-            payer_name=data["payer_name"],
+            payment_value=data["paymentValue"],
+            payer_id=data["payerId"],
+            payer_name=data["payerName"],
             solicitation=data["solicitation"],
         )

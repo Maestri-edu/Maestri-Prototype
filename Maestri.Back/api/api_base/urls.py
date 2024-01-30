@@ -6,4 +6,5 @@ urlpatterns = [
     path("pix/", include("pix.urls")),
     path("pix-slip/", include("pix_slip.urls")),
     path("hook/", include("hook.urls")),
+    path("campaign/", include("campaign.urls")),
 ]
