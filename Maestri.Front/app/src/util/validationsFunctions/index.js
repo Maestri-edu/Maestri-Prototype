@@ -157,3 +157,42 @@ export function validateCPF(cpf) {
     }
 
 }
+
+export function validateRG(rg) {
+    // Remove caracteres não numéricos
+    rg = rg?.replace(/\D/g, '');
+
+    // Se o RG não tem 9 dígitos, considera inválido
+    if (rg?.length !== 9) {
+        return {
+            isValid: false,
+            message: "RG deve conter 9 dígitos"
+        };
+    }
+
+    // Transforma o número do RG em um array de dígitos
+    const digitos = rg.split('').map(Number);
+
+    // Calcula o dígito de controle
+    let soma = 0;
+    for (let i = 0; i < digitos.length; i++) {
+        soma += digitos[i] * (9 - i);
+    }
+    const digitoControle = (soma * 10) % 11;
+
+    // Verifica se o dígito de controle corresponde ao último dígito do RG
+    const isValid = digitoControle === digitos[8];
+
+    if (isValid) {
+        return {
+            isValid: true,
+            message: null
+        };
+    } else {
+        return {
+            isValid: false,
+            message: "RG é inválido"
+        };
+    }
+
+}

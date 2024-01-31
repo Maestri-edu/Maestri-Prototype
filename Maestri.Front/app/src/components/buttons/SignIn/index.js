@@ -5,7 +5,7 @@ const ButtonSignIn = ({ onPress }) => {
 
   return (
     <TouchableOpacity style={stylesComponent.button} onPress={onPress}>
-      <Text style={stylesComponent.buttonText}> Sing In </Text>
+      <Text style={stylesComponent.buttonText}> Sing In</Text>
     </TouchableOpacity>
   );
 };

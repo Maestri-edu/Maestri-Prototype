@@ -1,7 +1,7 @@
 import { Text, View, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import BackGround from "../../components/backgroud/index.js";
-import LogoMaestri from "../../components/iconMaestri/index.js";
+import LogoMaestri from "../../components/LogoMaestri/index.js";
 import stylesComponent from "../../design-System/components-styles.js";
 import Title from "../../components/title/index.js";
 
@@ -29,6 +29,8 @@ const Home = () => {
         <TouchableOpacity style={stylesComponent.button} onPress={toSignUp}>
           <Text style={stylesComponent.buttonText}> Sing Up </Text>
         </TouchableOpacity>
+
+        
       </View>
     </View>
   );

@@ -14,14 +14,6 @@ const styles = StyleSheet.create({
     placeholder: {
         color: colors.mediumGray,
     },
-    input:{
-        borderWidth:0,
-        borderBottomWidth:2,
-        borderColor:colors.softWhite,
-        width: "80%",
-        height: 30,
-        color:colors.mediumGray
-    },
 
     boxArea: {
         width: "80%",
@@ -51,7 +43,7 @@ const styles = StyleSheet.create({
         width: "auto",
         borderColor: "white",
         borderWidth: 1,
-        // padding: 5,
+        padding: 5,
         marginEnd: "auto",
         marginLeft: 36,
         borderTopLeftRadius: 0,

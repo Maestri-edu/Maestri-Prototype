@@ -2,7 +2,7 @@ import { View } from "react-native";
 import { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 
-import LogoMaestri from "../../components/iconMaestri";
+import LogoMaestri from "../../components/LogoMaestri";
 import BackGround from "../../components/backgroud/";
 import ButtonSignIn from "../../components/buttons/SignIn";
 import Form from "../../components/form";
@@ -22,7 +22,7 @@ const Login = () => {
   function submitLogin() {
     setSubmitButtomIsClicked(true);
     //execute fetch to API
-    navigation.navigate("ComplementaryRegister/personData");
+    navigation.navigate("Resources");
     // if (isValidInputs()) {
     // }
   }

@@ -13,8 +13,8 @@ const colors = {
   //Light
   softWhite: "#FAFAFA", // Branco Suave - para fundos e design de cartões
   lightGray: "#DADFE1", // Cinza Claro - para linhas divisoras e placeholders
-  mediumGray: "#BDC3C7", // Cinza Médio - para texto secundário e ícones
-  darkGray: "#7F8C8D", // Cinza Escuro - para textos e detalhes menos proeminentes
+  mediumGray: "#8a8a8a", // Cinza Médio - para texto secundário e ícones
+  darkGray: "#323232", // Cinza Escuro - para textos e detalhes menos proeminentes
 
   //default colors
   secondaryGold: "#F5F2E8", // Dourado Secundário

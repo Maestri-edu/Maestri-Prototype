@@ -3,8 +3,10 @@
 class FormComplementionRegisterState {
     #formInputsFields = {};
 
-    setValues({...inputs}){
-        console.log(inputs);
+    addValues(inputs){
+        Object.keys(inputs).forEach(key =>{
+            this.#formInputsFields[key] = inputs[key];
+        })
     }
 
     getValues(){

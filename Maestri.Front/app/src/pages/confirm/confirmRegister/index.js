@@ -19,7 +19,7 @@ const ConfirmRegister = () => {
                 <Title title={"Confirmar registro"}/>
                 <Text style={stylesComponent.text}> Enviamos uma menssagem de confirmação no seu WhatsApp, por favor verificar !</Text>
                 <TouchableOpacity onPress={goBack} style={stylesComponent.button}>
-                    <Text style={stylesComponent.buttonText}> voltar </Text>
+                    <Text style={stylesComponent.buttonText}> Voltar </Text>
                 </TouchableOpacity>
             </View>
         </View>

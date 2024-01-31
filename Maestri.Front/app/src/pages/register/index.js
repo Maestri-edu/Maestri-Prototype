@@ -81,7 +81,7 @@ const Register = () => {
   const submitSignUp = () => {
     setSubmitButtomIsClicked(true);
     //execute fetch to signUp
-    navigation.navigate("NotConfirmRegister");
+    navigation.navigate("ComplementaryRegister/personData");
     // if(isValidInputs()){
     // }
   }

@@ -11,13 +11,22 @@ const styles = StyleSheet.create({
         marginTop:5
     },
 
-    input:{
+    inputEditable:{
         borderWidth:0,
         borderBottomWidth:2,
         borderColor:colors.softWhite,
         width: "80%",
         height: 30,
         color:colors.mediumGray
+    },
+    inputNotEditable:{
+        borderWidth:0,
+        borderBottomWidth:2,
+        borderColor:colors.softWhite,
+        width: "80%",
+        height: 30,
+        color:colors.mediumGray,
+        opacity:0.4
     },
 
     invalidFeedBack:{
