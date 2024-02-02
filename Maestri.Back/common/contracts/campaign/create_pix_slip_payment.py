@@ -10,7 +10,7 @@ class CreateCampaignPixSlipPayment:
     payer_email: str
     payer_cep: str
     payer_telephone: Telephone
-    course_id: int
+    course_id: str
     course_name: str
 
     @staticmethod
@@ -40,3 +40,8 @@ class CreateCampaignPixSlipPayment:
             "courseId": self.course_id,
             "courseName": self.course_name,
         }
+
+
+"""
+
+"""

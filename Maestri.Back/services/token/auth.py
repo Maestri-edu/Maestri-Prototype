@@ -1,3 +1,4 @@
+from result import Err, Ok
 from common.constants.web_constants import WebConstants as wc
 from common.enums.request_type import RequestType
 from common.helper.datetime_provider import DatetimeProvider as dt
@@ -21,10 +22,16 @@ class Auth:
             return current_token.value
 
         print("new token")
-        new_token = self.auth_token_request()
-        self._save_new_token(new_token)
+        new_token_response = self.auth_token_request()
 
-        return new_token
+        match (new_token_response):
+            case Ok(success):
+                new_token: str = success.data["access_token"]
+                self._save_new_token(new_token)
+                return new_token
+            case Err(error):
+                print("Not good, something is wrong", error.data)
+                return current_token.value
 
     def _save_new_token(self, token_value: str):
         token = AuthTokenModel(
@@ -44,14 +51,13 @@ class Auth:
         response = self._dr.type_request(
             RequestType.POST,
             wc.OAUTH_TOKEN_REQUEST_URL,
-            self.get_auth_header(),
+            self.get_standard_header(),
             request_body,
         )
 
-        # token = response.json().get("access_token")
-        return response.token
+        return response
 
-    def get_standart_header(self):
+    def get_standard_header(self):
         return {"Content-Type": "application/x-www-form-urlencoded"}
 
     def get_auth_header(self):

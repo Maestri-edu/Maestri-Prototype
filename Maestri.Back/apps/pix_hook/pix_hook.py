@@ -10,5 +10,4 @@ class PixHook:
         self._hook = hook
 
     def create_hook(self, data: CreatePixWebHook):
-        response = self._hook.create_webhook(URL(data.hook_url), "pix-key")
-        return response
+        return self._hook.create_webhook(URL(data.hook_url), "pix-key")

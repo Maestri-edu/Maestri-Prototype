@@ -9,6 +9,7 @@ djangorestframework = "*"
 black = "*"
 requests = "*"
 pytz = "*"
+result = "*"
 
 [dev-packages]
 

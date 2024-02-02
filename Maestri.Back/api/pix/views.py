@@ -14,9 +14,10 @@ def create_payment(request):
     result = pix_payment.create_payment(request_data)
     match result:
         case Ok(success):
-            return Response(success)
+            return Response(success.data)
         case Err(error):
-            return Response(status=error.status_code, data=error.data)
+            return Response(error.data)
+    return Response("hello darknesss my old friend")
 
 
 @api_view(["POST"])

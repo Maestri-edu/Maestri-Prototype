@@ -21,7 +21,4 @@ class PixSlipService:
             pix_slip_payment.json_request_body(),
         )
 
-        if response.status_code != 200:
-            print(f"Oh well... what now?. {response.status_code}")
-
         return response
