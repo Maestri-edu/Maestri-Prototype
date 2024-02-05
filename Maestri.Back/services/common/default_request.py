@@ -36,7 +36,7 @@ class DefaultRequest:
         header: dict[str, str],
         body: dict[str, str | int | float] | str,
     ) -> Result[SuccessResponse, ErrorResponse]:
-        request = f"type: {type.name} url: {url} header: {header} body: {body}"
+        request = f"type: {type.name} url: {url.value} header: {header} body: {body}"
 
         print("\n")
         print("------------------------------")

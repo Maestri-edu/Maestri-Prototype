@@ -1,5 +1,5 @@
 from common.enums.request_type import RequestType
-from common.constants.web_constants import WebConstants as wc
+from common.constants.web_constants import WebConstants as wc, Util
 from models.pix_slip.pix_slip_payment_model import PixSlipPaymentModel
 from services.common.default_request import DefaultRequest
 from services.token.auth import Auth
@@ -19,6 +19,16 @@ class PixSlipService:
             wc.PIX_SLIP_PAYMENT_URL,
             self._auth.get_auth_header(),
             pix_slip_payment.json_request_body(),
+        )
+
+        return response
+
+    def get_payment_invoice(self, payment_id: str):
+        response = self._dr.type_request(
+            RequestType.GET,
+            Util.add_url_key(wc.PIX_SLIP_PAYMENT_URL, f"{payment_id}/pdf"),
+            self._auth.get_auth_header(),
+            {},
         )
 
         return response

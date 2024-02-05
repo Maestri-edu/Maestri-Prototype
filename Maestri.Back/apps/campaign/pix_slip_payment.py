@@ -6,6 +6,8 @@ from common.helper.datetime_provider import DatetimeProvider as dt
 from models.common.payer_model import PayerModel, Address
 from models.pix_slip.pix_slip_payment_model import PixSlipPaymentModel
 from services.pix_slip.pix_slip_service import PixSlipService
+from common.errors.campaign import PixSlipCampaignError
+from result import Err
 import datetime
 
 
@@ -16,6 +18,10 @@ class PixSlipPayment:
         self._pix_slip = pix_slip
 
     def create_payment(self, request: CreateCampaignPixSlipPayment):
+
+        if not CampaignPixSlipValidator.validate(request):
+            return Err(PixSlipCampaignError.invalid_fields)
+
         payment_due_date = dt.utc_now() + datetime.timedelta(days=1)
 
         payment = PixSlipPaymentModel(
@@ -42,3 +48,13 @@ class PixSlipPayment:
         )
 
         return self._pix_slip.emit_payment(payment)
+
+
+class CampaignPixSlipValidator:
+    @staticmethod
+    def validate(model: CreateCampaignPixSlipPayment) -> bool:
+
+        if model.payment_value < 1300 or model.payment_value > 1600:
+            return False
+
+        return True
