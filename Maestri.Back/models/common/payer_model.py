@@ -7,6 +7,9 @@ class Telephone:
     ddd: str
     number: str
 
+    def get_complete_number(self) -> str:
+        return f"{self.ddd} {self.number}"
+
 
 @dataclass(frozen=True, order=True)
 class Address:
