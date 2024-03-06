@@ -43,7 +43,7 @@ class Auth:
 
     def auth_token_request(self):
         request_body = (
-            f"client_id=<{BANK.CLIENT_ID}>&client_secret=<{BANK.CLIENT_SECRET}>"
+            f"client_id={BANK.CLIENT_ID}&client_secret={BANK.CLIENT_SECRET}"
             "&scope=extrato.read boleto-cobranca.read boleto-cobranca.write pagamento-boleto.write pagamento-boleto.read pagamento-darf.write cob.write cob.read cobv.write cobv.read pix.write pix.read webhook.read webhook.write payloadlocation.write payloadlocation.read pagamento-pix.write pagamento-pix.read webhook-banking.write webhook-banking.read"
             "&grant_type=client_credentials"
         )

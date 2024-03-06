@@ -10,8 +10,7 @@ class CreateCampaignPixSlipPayment:
     payer_email: str
     payer_cep: str
     payer_telephone: Telephone
-    course_id: str
-    course_name: str
+    course_id: int
 
     @staticmethod
     def create(data: dict):
@@ -25,7 +24,6 @@ class CreateCampaignPixSlipPayment:
                 ddd=data["payerTelephoneDDD"], number=data["payerTelephoneNumber"]
             ),
             course_id=data["courseId"],
-            course_name=data["courseName"],
         )
 
     def json_request_body(self):
@@ -38,10 +36,4 @@ class CreateCampaignPixSlipPayment:
             "payerTelephoneDDD": self.payer_telephone.ddd,
             "payerTelephoneNumber": self.payer_telephone.number,
             "courseId": self.course_id,
-            "courseName": self.course_name,
         }
-
-
-"""
-
-"""

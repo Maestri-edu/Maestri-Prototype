@@ -4,7 +4,8 @@ from dataclasses import dataclass
 from common.constants.web_constants import URL
 from common.enums.request_type import RequestType
 from result import Ok, Err, Result
-
+from common.secrets.inter.certificates import Certificates
+import json
 
 @dataclass(frozen=True, order=True)
 class SuccessResponse:
@@ -44,43 +45,48 @@ class DefaultRequest:
         print("------------------------------")
         print("\n")
 
-        response = SuccessResponse(
-            200,
-            {
-                "details": request,
-                "access_token": "- access token token token token access - ",
-            },
-        )
+        # response = SuccessResponse(
+        #     200,
+        #     {
+        #         "details": request,
+        #         "access_token": "- access token token token token access - ",
+        #     },
+        # )
 
-        return Ok(response)
+        #return Ok(response)
 
         """Commented For Testing"""
 
-        # typed_request = self._request_dict[type]
+        typed_request = self._request_dict[type]
 
-        # response: requests.Response = typed_request(
-        #     url=url.value, headers=header, data=body
-        # )
+        if isinstance(body, dict):
+            data=json.dumps(body)
+        else:
+            data = body
 
-        # try:
-        #     response.raise_for_status()
-        # except requests.HTTPError as ex:
-        #     return Err(
-        #         ErrorResponse(response.status_code, self._extract_json_data(response))
-        #     )
+        response: requests.Response = typed_request(
+            url=url.value, headers=header, data=data, cert=(Certificates.Certificate_Path, Certificates.Key_Path)
+        )
 
-        # mapped_result = SuccessResponse(
-        #     response.status_code, self._extract_json_data(response)
-        # )
+        try:
+            response.raise_for_status()
+        except requests.HTTPError as ex:
+            return Err(
+                ErrorResponse(response.status_code, self._extract_json_data(response))
+            )
 
-        # print(
-        #     "It worked somehow",
-        #     mapped_result.status_code,
-        #     mapped_result.data,
-        #     mapped_result.success,
-        # )
+        mapped_result = SuccessResponse(
+            response.status_code, self._extract_json_data(response)
+        )
 
-        # return Ok(mapped_result)
+        print(
+            "It worked somehow",
+            mapped_result.status_code,
+            mapped_result.data,
+            mapped_result.success,
+        )
+
+        return Ok(mapped_result)
 
     def _extract_json_data(self, response: requests.Response) -> dict[str, Any]:
         try:

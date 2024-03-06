@@ -1,10 +1,38 @@
 from dataclasses import dataclass
 from datetime import datetime
+from enum import Enum
+from models.db_models.charge import ChargeSituation
+
+
+class PaymentStatus(Enum):
+    payed = "RECEBIDO"
+    unpayed = "A_RECEBER"
+    marked_as_payed = "MARCADO_RECEBIDO"
+    late = "ATRASADO"
+    canceled = "CANCELADO"
+    expired = "EXPIRADO"
+
+
+_convert = {
+    PaymentStatus.payed.value: ChargeSituation.recebido,
+    PaymentStatus.unpayed.value: ChargeSituation.a_receber,
+    PaymentStatus.marked_as_payed.value: ChargeSituation.marcado_recebido,
+    PaymentStatus.late.value: ChargeSituation.atrasado,
+    PaymentStatus.canceled.value: ChargeSituation.cancelado,
+    PaymentStatus.expired.value: ChargeSituation.expirado,
+}
+
+
+class PaymentStatusDict:
+
+    @staticmethod
+    def convert_to_charge_situation(status: str) -> ChargeSituation:
+        return _convert[status]
 
 
 @dataclass
 class PixSlipPaymentResponse:
-    solicitaion_code: str
+    solicitation_code: str
     account_number: str
     status: str
     received_datetime: datetime
@@ -19,7 +47,7 @@ class PixSlipPaymentResponse:
     @staticmethod
     def create(data: dict):
         return PixSlipPaymentResponse(
-            solicitaion_code=data["codigoSolicitacao"],
+            solicitation_code=data["codigoSolicitacao"],
             account_number=data["seuNumero"],
             status=data["situacao"],
             received_datetime=datetime.fromisoformat(data["dataHoraSituacao"]),
@@ -34,7 +62,7 @@ class PixSlipPaymentResponse:
 
     def json_request_body(self):
         return {
-            "codigoSolicitacao": self.solicitaion_code,
+            "codigoSolicitacao": self.solicitation_code,
             "seuNumero": self.account_number,
             "situacao": self.status,
             "dataHoraSituacao": self.received_datetime,
